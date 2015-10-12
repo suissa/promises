@@ -21,10 +21,7 @@ function readJSON(filename, callback){
 }
 ```
 
-The extra callback parameter confuses our idea of what is input and what is the return value.
-It doesn't work at all with control flow primitives.
-It doesn't handle errors thrown by JSON.parse
-We need to handle errors thrown by JSON.parse but we also need to be careful not to handle errors thrown by the callback function. By the time we've done all of this our code is a mess of error handling:
+O parâmetro de retorno de chamada adicional confunde nossa idéia do que é a entrada e qual é o valor de retorno.
 
 - O parâmetro adicional do callback confunde nossa idéia do que é a entrada e qual é o valor de retorno.
 - Ele não funciona com as primitivas de controle de fluxo.
@@ -52,9 +49,9 @@ Apesar de toda essa bagunça de código de tratamento de erros, ainda ficamos co
 
 A idéia central por trás da *promise* é que uma *promise* representa o resultado de uma operação assíncrona. A *promise* está em um dos três estados diferentes:
 
-pendente(pending) - O estado inicial de uma *promise*.
-cumprida(fulfilled) - O estado de uma *promise* que representa uma operação bem sucedida.
-rejeitados(rejected) - O estado de uma *promise* que representa uma operação falhou.
+- pendente(pending) - O estado inicial de uma *promise*.
+- cumprida(fulfilled) - O estado de uma *promise* que representa uma operação bem sucedida.
+- rejeitados(rejected) - O estado de uma *promise* que representa uma operação falhou.
 
 Uma vez que uma promessa é cumprida ou rejeitada, é imutável (ou seja, ele nunca pode mudar novamente).
 
@@ -147,8 +144,6 @@ var realPromise = Promise.resolve(jQueryPromise);
 
 ## Navegador
 
-Promises are currently only supported by a pretty small selection of browsers (see kangax compatibility tables). The good news is that they're extremely easy to polyfill (minified / unminified):
-
 *Promises* são atualmente suportadas apenas por uma muito pequena seleção de navegadores (ver tabelas de compatibilidade kangax). A boa notícia é que eles são extremamente fáceis de criar um *polyfill* (minified / unminified):
 
 ```html
@@ -162,10 +157,6 @@ Nenhum dos navegadores atualmente suporta `Promise.prototype.done` por isso, se 
 ```
 
 ## Node.js
-
-It's generally not seen as good practice to polyfill things in node.js. Instead, you're better off just requiring the library wherever you need it.
-
-To install promise run:
 
 Não é geralmente visto como uma boa prática criar polyfill para coisas em Node.js. Em vez disso, é melhor apenas requisitar a biblioteca sempre que você precisar.
 
@@ -181,9 +172,7 @@ Depois, você pode carregá-la em uma variável local usando "require":
 var Promise = require('promise');
 ```
 
-The "promise" library also provides a couple of really useful extensions for interacting with node.js
-
-A biblioteca "promessa" também oferece um par de extensões realmente úteis para interagir com node.js
+A biblioteca "promise" também oferece algumas extensões realmente úteis para interagir com node.js
 
 ```js
 var readFile = Promise.denodeify(require('fs').readFile);
@@ -196,3 +185,9 @@ function readJSON(filename, callback){
   return readFile(filename, 'utf8').then(JSON.parse).nodeify(callback);
 }
 ```
+
+## Leitura adicional
+
+[Patterns](https://www.promisejs.org/patterns/) - padrões de uso da *promise*, introduzindo vários métodos auxiliares que você vai economizar tempo.
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) - A rede de desenvolvedores Mozilla tem excelente documentação de *promises*.
+[YouTube](https://www.youtube.com/watch?v=qbKWsbJ76-s) - Um vídeo meu JSConf.eu que discute muitas das mesmas coisas que aparecem neste artigo.
