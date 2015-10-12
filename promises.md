@@ -1,5 +1,7 @@
 # Promises
 
+Tradução desse artigo [https://www.promisejs.org/](https://www.promisejs.org/).
+
 ## Motivação
 
 Considere a seguinte função JavaScript síncrona para ler um arquivo e analisá-lo como JSON. É simples e fácil de ler, mas você não gostaria de usá-lo na maioria das aplicações, uma vez que irá bloquear. Isto significa que, enquanto você está lendo o arquivo do disco (uma operação lenta) nada mais pode acontecer.
